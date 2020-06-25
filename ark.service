@@ -6,8 +6,6 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/bin/docker create \
               --rm \
-              --tty \
-              --interactive \
               --name ark \
               --publish 7777:7777/udp \
               --publish 7778:7778/udp \
