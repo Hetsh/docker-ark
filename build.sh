@@ -23,23 +23,15 @@ APP_NAME="ark"
 docker build --tag "$APP_NAME" .
 
 if confirm_action "Test image?"; then
-	# Set up temporary directory
-	TMP_DIR=$(mktemp -d "/tmp/$APP_NAME-XXXXXXXXXX")
-	add_cleanup "rm -rf $TMP_DIR"
-
-	# Apply permissions, UID matches process user
-	extract_var APP_UID "Dockerfile" "\K\d+"
-	chown -R "$APP_UID":"$APP_UID" "$TMP_DIR"
-
 	# Start the test
-	extract_var DATA_DIR "Dockerfile" "\"\K[^\"]+"
 	docker run \
 	--rm \
+	--tty \
 	--interactive \
-	--publish 27500:27500/udp \
-	--publish 27500:27500/tcp \
+	--publish 7777:7777/udp \
+	--publish 7778:7778/udp \
+	--publish 27020:27020/tcp \
 	--publish 27015:27015/udp \
-	--mount type=bind,source="$TMP_DIR",target="/$DATA_DIR" \
 	--mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
 	--name "$APP_NAME" \
 	"$APP_NAME"

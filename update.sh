@@ -23,18 +23,10 @@ update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 RS_PKG="MANIFEST_ID" # Steam depot id for identification
 RS_REGEX="\d+"
 CURRENT_RS_VERSION=$(cat Dockerfile | grep -P -o "$RS_PKG=\K$RS_REGEX")
-NEW_RS_VERSION=$(curl -L -s "https://steamdb.info/depot/600762/" | grep -P -o "<td>\K$RS_REGEX" | tail -n 1)
+NEW_RS_VERSION=$(curl -L -s "https://steamdb.info/depot/376031/" | grep -P -o "<td>\K$RS_REGEX" | tail -n 1)
 if [ "$CURRENT_RS_VERSION" != "$NEW_RS_VERSION" ]; then
 	prepare_update "$RS_PKG" "ARK" "$CURRENT_RS_VERSION" "$NEW_RS_VERSION"
-
-	# Scrape actual ark Version
-	NEW_ACTUAL_RS_VERSION=$(curl -L -s "https://store.steampowered.com/news/?appids=544550&appgroupname=ARK" | grep -P -o "(\d+\.){3}\d+" | head -n 1)
-	CURRENT_ACTUAL_RS_VERSION="${_CURRENT_VERSION%-*}"
-	if [ "$CURRENT_ACTUAL_RS_VERSION" != "$NEW_ACTUAL_RS_VERSION" ]; then
-		update_version "$NEW_ACTUAL_RS_VERSION"
-	else
-		update_release
-	fi
+	update_version "$NEW_RS_VERSION"
 fi
 
 if ! updates_available; then
