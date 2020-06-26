@@ -9,7 +9,6 @@ ExecStartPre=-/bin/docker create \
               --name ark \
               --publish 7777:7777/udp \
               --publish 7778:7778/udp \
-              --publish 27020:27020/tcp \
               --publish 27015:27015/udp \
               --mount type=bind,source=/apps/ark,target=/ark \
               --mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
