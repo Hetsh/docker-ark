@@ -29,4 +29,4 @@ USER "$APP_USER"
 WORKDIR "$DATA_DIR"
 ENV BIN_DIR="$APP_DIR/ShooterGame/Binaries/Linux"
 ENV MAP="TheIsland"
-ENTRYPOINT exec "$BIN_DIR/ShooterGameServer" "$MAP"?listen$SERVER_OPTS
+ENTRYPOINT exec "$BIN_DIR/ShooterGameServer" "$MAP"?listen
