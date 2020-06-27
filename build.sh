@@ -21,7 +21,7 @@ fi
 # Build the image
 APP_NAME="ark"
 APP_TAG="hetsh/$APP_NAME"
-docker build --tag "$APP_TAG".
+docker build --tag "$APP_TAG" .
 
 if confirm_action "Test image?"; then
 	# Start the test
