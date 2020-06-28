@@ -29,5 +29,7 @@ EXPOSE 7777/udp 7778/udp 27015/udp 27020/tcp
 USER "$APP_USER"
 WORKDIR "$APP_DIR"
 ENV MAP="TheIsland"
+ENV PLAYERS="10"
 STOPSIGNAL SIGINT
-ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP"?listen
+ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP"?listen?MaxPlayers="$PLAYERS"
+# MaxPlayers in GameUserSettings.ini will always be overridden and must be declared as command line option
