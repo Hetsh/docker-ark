@@ -8,7 +8,7 @@ RUN useradd --uid "$APP_UID" --user-group --no-create-home --shell /sbin/nologin
 # Application
 ARG APP_ID=376030
 ARG DEPOT_ID=376031
-ARG MANIFEST_ID=147869627320274972
+ARG MANIFEST_ID=7336798305707656751
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     touch "$APP_DIR/Engine/Config/Base.ini" && \
@@ -30,6 +30,7 @@ USER "$APP_USER"
 WORKDIR "$APP_DIR"
 ENV MAP="TheIsland"
 ENV PLAYERS="10"
+ENV SERVER_OPTS=""
 STOPSIGNAL SIGINT
-ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP"?listen?MaxPlayers="$PLAYERS"
+ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP?listen?MaxPlayers=$PLAYERS" $SERVER_OPTS
 # MaxPlayers in GameUserSettings.ini will always be overridden and must be declared as command line option
