@@ -1,20 +1,22 @@
 [Unit]
-Description=ARK server
+Description=ARK server with %I map
 After=docker.service
 Requires=docker.service
 
 [Service]
 ExecStartPre=-/bin/docker create \
+              --env MAP="%I" \
+              --env SERVER_OPTS="-NoBattlEye" \
               --rm \
-              --name ark \
+              --name ark_%I \
               --publish 7777:7777/udp \
               --publish 7778:7778/udp \
               --publish 27015:27015/udp \
-              --mount type=bind,source=/apps/ark,target=/ark \
+              --mount type=bind,source=/apps/ark/%I,target=/ark \
               --mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
               hetsh/ark
-ExecStart=/bin/docker start --attach ark
-ExecStop=/bin/docker stop --time 30 ark
+ExecStart=/bin/docker start --attach ark_%I
+ExecStop=/bin/docker stop --time 30 ark_%I
 
 [Install]
 WantedBy=multi-user.target
