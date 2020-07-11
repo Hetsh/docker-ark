@@ -12,7 +12,7 @@ docker stop ark
 ```
 
 ## Updates
-This image contains a specific version of the game and will not update the game on startup, this decreases starting time. It also enables a more efficient use of disk space since multiple containers can reference the same image. The image is updated daily, so you can always pull the most recent version via docker hub.
+This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage. Version number is the manifest id that can also be found on [SteamDB](https://steamdb.info/depot/376031/). This id and therefore the image on docker hub is updated daily.
 
 ## Configuration
 ARK can be configured with the configuration files in `/ark/Config/LinuxServer`. This [wiki](https://ark.gamepedia.com/Server_Configuration) contains an exhaustive list of adjustable parameters.
