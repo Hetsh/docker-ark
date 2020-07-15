@@ -8,7 +8,7 @@ RUN useradd --uid "$APP_UID" --user-group --no-create-home --shell /sbin/nologin
 # Application
 ARG APP_ID=376030
 ARG DEPOT_ID=376031
-ARG MANIFEST_ID=8322133206049423504
+ARG MANIFEST_ID=2306764356504409809
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     touch "$APP_DIR/Engine/Config/Base.ini" && \
