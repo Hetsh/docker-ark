@@ -21,9 +21,9 @@ fi
 # Build the image
 APP_NAME="ark"
 APP_TAG="hetsh/$APP_NAME"
-docker build --tag "$APP_TAG" .
+docker build --tag "$APP_TAG" --tag "$APP_TAG:$(git describe --tags --abbrev=0)" .
 
-if confirm_action "Test image?"; then
+if [ "${1-}" = "--test" ]; then
 	# Start the test
 	docker run \
 	--rm \
