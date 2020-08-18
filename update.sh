@@ -30,7 +30,7 @@ if [ "$CURRENT_ARK_VERSION" != "$NEW_ARK_VERSION" ]; then
 fi
 
 if ! updates_available; then
-	echo "No updates available."
+	#echo "No updates available."
 	exit 0
 fi
 
