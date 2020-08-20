@@ -21,9 +21,9 @@ update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # ARK
 ARK_PKG="MANIFEST_ID" # Steam depot id for identification
-ARK_REGEX="\d+"
+ARK_REGEX="\d{17,19}"
 CURRENT_ARK_VERSION=$(cat Dockerfile | grep -P -o "$ARK_PKG=\K$ARK_REGEX")
-NEW_ARK_VERSION=$(curl --silent --location "https://steamdb.info/depot/376031/" | grep -P -o "<td>\K$ARK_REGEX" | tail -n 1)
+NEW_ARK_VERSION=$(curl --silent --location "https://steamdb.info/depot/376031/" | grep -P -o "(?<=<td>)$ARK_REGEX(?=</td>)" | tail -n 1)
 if [ "$CURRENT_ARK_VERSION" != "$NEW_ARK_VERSION" ]; then
 	prepare_update "$ARK_PKG" "ARK" "$CURRENT_ARK_VERSION" "$NEW_ARK_VERSION"
 	update_version "$NEW_ARK_VERSION"
