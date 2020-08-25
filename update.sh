@@ -20,12 +20,13 @@ assert_dependency "curl"
 update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # ARK
-ARK_PKG="MANIFEST_ID" # Steam depot id for identification
-ARK_REGEX="\d{17,19}"
-CURRENT_ARK_VERSION=$(cat Dockerfile | grep -P -o "$ARK_PKG=\K$ARK_REGEX")
-NEW_ARK_VERSION=$(curl --silent --location "https://steamdb.info/depot/376031/" | grep -P -o "(?<=<td>)$ARK_REGEX(?=</td>)" | tail -n 1)
+MAN_ID="MANIFEST_ID" # Steam depot id for identification
+MAN_REGEX="\d{17,19}"
+CURRENT_ARK_VERSION=$(cat Dockerfile | grep -P -o "(?<=$MAN_ID=)$MAN_REGEX")
+extract_var DEPOT_ID "./Dockerfile" "\K\d+"
+NEW_ARK_VERSION=$(curl --silent --location "https://steamdb.info/depot/376031" | grep -P -o "(?<=<td>)$MAN_REGEX(?=</td>)" | tail -n 1)
 if [ "$CURRENT_ARK_VERSION" != "$NEW_ARK_VERSION" ]; then
-	prepare_update "$ARK_PKG" "ARK" "$CURRENT_ARK_VERSION" "$NEW_ARK_VERSION"
+	prepare_update "$MAN_ID" "ARK" "$CURRENT_ARK_VERSION" "$NEW_ARK_VERSION"
 	update_version "$NEW_ARK_VERSION"
 fi
 
