@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/bin/docker create \
               --env MAP="%I" \
-              --env SERVER_OPTS="-NoBattlEye" \
+              --env SERVER_OPTS="-NoBattlEye -servergamelog" \
               --rm \
               --name ark_%I \
               --publish 7777:7777/udp \
