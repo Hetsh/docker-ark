@@ -22,8 +22,8 @@ RUN mkdir "$DATA_DIR" && \
     ln -s "$DATA_DIR" "$APP_DIR/ShooterGame/Saved"
 VOLUME ["$DATA_DIR"]
 
-#      GAME     RAW      QUERY     RCON
-EXPOSE 7777/udp 7778/udp 27015/udp 27020/tcp
+#      GAME     QUERY     RCON
+EXPOSE 7777/udp 27015/udp 27020/tcp
 
 # Launch parameters
 USER "$APP_USER"

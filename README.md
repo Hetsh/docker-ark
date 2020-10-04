@@ -3,7 +3,7 @@ Simple to set up dedicated ARK server.
 
 ## Running the server
 ```bash
-docker run --detach --name ark --publish 7777/udp --publish 7778/udp --publish 27015/udp hetsh/ark
+docker run --detach --name ark --publish 7777/udp --publish 27015/udp hetsh/ark
 ```
 
 ## Stopping the container

@@ -32,7 +32,6 @@ case "${1-}" in
 		--tty \
 		--interactive \
 		--publish 7777:7777/udp \
-		--publish 7778:7778/udp \
 		--publish 27015:27015/udp \
 		--publish 27020:27020/tcp \
 		--mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
