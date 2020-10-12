@@ -10,10 +10,10 @@ ARG APP_ID=376030
 ARG DEPOT_ID=376031
 ARG MANIFEST_ID=2224533014895039034
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
+# Creating empty Base.ini prevents game crashing on startup
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     touch "$APP_DIR/Engine/Config/Base.ini" && \
     chown -R "$APP_USER":"$APP_USER" "$APP_DIR"
-# Creating empty Base.ini prevents game crashing on startup
 
 # Volumes
 ARG DATA_DIR="/ark"
@@ -32,5 +32,5 @@ ENV MAP="TheIsland"
 ENV PLAYERS="10"
 ENV SERVER_OPTS=""
 STOPSIGNAL SIGINT
+# MaxPlayers in GameUserSettings.ini will always be ignored -> declare as command line option
 ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP?listen?MaxPlayers=$PLAYERS" $SERVER_OPTS
-# MaxPlayers in GameUserSettings.ini will always be overridden and must be declared as command line option
