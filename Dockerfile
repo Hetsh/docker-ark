@@ -8,7 +8,7 @@ RUN useradd --uid "$APP_UID" --user-group --no-create-home --shell /sbin/nologin
 # Application
 ARG APP_ID=376030
 ARG DEPOT_ID=376031
-ARG MANIFEST_ID=6628987268257413615
+ARG MANIFEST_ID=4015050616871381801
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 # Creating empty Base.ini prevents game crashing on startup
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
