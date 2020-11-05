@@ -8,7 +8,7 @@ RUN useradd --uid "$APP_UID" --user-group --no-create-home --shell /sbin/nologin
 # Application
 ARG APP_ID=376030
 ARG DEPOT_ID=376031
-ARG MANIFEST_ID=7621814794629887101
+ARG MANIFEST_ID=5874279580829398636
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 # Creating empty Base.ini prevents game crashing on startup
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
@@ -28,9 +28,9 @@ EXPOSE 7777/udp 27015/udp 27020/tcp
 # Launch parameters
 USER "$APP_USER"
 WORKDIR "$APP_DIR"
-ENV MAP="TheIsland"
-ENV PLAYERS="10"
-ENV SERVER_OPTS=""
+ENV MAP="TheIsland" \
+    PLAYERS="10" \
+    SERVER_OPTS=""
 STOPSIGNAL SIGINT
 # MaxPlayers in GameUserSettings.ini will always be ignored -> declare as command line option
 ENTRYPOINT exec "ShooterGame/Binaries/Linux/ShooterGameServer" "$MAP?listen?MaxPlayers=$PLAYERS" $SERVER_OPTS
