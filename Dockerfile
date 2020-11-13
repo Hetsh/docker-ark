@@ -14,7 +14,7 @@ ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     touch "$APP_DIR/Engine/Config/Base.ini" && \
     chown -R "$APP_USER":"$APP_USER" "$STEAM_DIR" && \
-    rm -r /tmp/dumps
+    rm -r /tmp/dumps /root/.steam /root/Steam
 
 # Volumes
 ARG DATA_DIR="/ark"
