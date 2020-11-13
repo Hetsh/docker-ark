@@ -24,8 +24,8 @@ APP_NAME="ark"
 IMG_NAME="hetsh/$APP_NAME"
 docker build --tag "$IMG_NAME:latest" --tag "$IMG_NAME:$_NEXT_VERSION" .
 
-# Start the test
 case "${1-}" in
+	# Test with default configuration
 	"--test")
 		docker run \
 		--rm \
@@ -38,6 +38,7 @@ case "${1-}" in
 		--name "$APP_NAME" \
 		"$IMG_NAME"
 	;;
+	# Push image to docker hub
 	"--upload")
 		if ! tag_exists "$IMG_NAME"; then
 			docker push "$IMG_NAME:latest"
