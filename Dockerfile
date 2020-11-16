@@ -3,7 +3,7 @@ FROM hetsh/steamcmd:1.2-1
 # App user
 ARG APP_USER="ark"
 ARG APP_UID=1366
-RUN useradd --uid "$APP_UID" --user-group --no-create-home --shell /sbin/nologin "$APP_USER"
+RUN useradd --uid "$APP_UID" --user-group --create-home --shell /sbin/nologin "$APP_USER"
 
 # Application
 ARG APP_ID=376030
