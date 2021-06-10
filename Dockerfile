@@ -11,7 +11,10 @@ ARG DEPOT_ID=376031
 ARG MANIFEST_ID=2228879491423775080
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 # Creating empty Base.ini prevents game crashing on startup
-RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
+RUN steamcmd.sh \
+        +login anonymous \
+        +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" \
+        +quit && \
     touch "$APP_DIR/Engine/Config/Base.ini" && \
     chown -R "$APP_USER":"$APP_USER" "$STEAM_DIR" && \
     rm -r \
