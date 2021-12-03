@@ -1,4 +1,4 @@
-FROM hetsh/steamcmd:20211115-1
+FROM hetsh/steamcmd:20211201-1
 
 # App user
 ARG APP_USER="ark"
@@ -8,7 +8,7 @@ RUN useradd --uid "$APP_UID" --user-group --create-home --shell /sbin/nologin "$
 # Application
 ARG APP_ID=376030
 ARG DEPOT_ID=376031
-ARG MANIFEST_ID=2556088797078449630
+ARG MANIFEST_ID=7762534055526169056
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 # Creating empty Base.ini prevents game crashing on startup
 RUN steamcmd.sh \
