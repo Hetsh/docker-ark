@@ -20,7 +20,7 @@ assert_dependency "curl"
 update_image "hetsh/steamcmd" "SteamCMD" "false" "\d+-\d+"
 
 # ARK
-update_depot "376031" "MANIFEST_ID" "ARK" "true"
+update_depot "376030" "376031" "MANIFEST_ID" "ARK" "true"
 
 if ! updates_available; then
 	#echo "No updates available."
